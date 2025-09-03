@@ -31,6 +31,56 @@
                 radial-gradient(circle at 10% 20%, rgba(40, 40, 40, 0.8) 0%, rgba(26, 26, 26, 0.8) 90%),
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23333333' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
+
+        /* Стили для аудиоплеера */
+        .audio-player {
+            background-color: var(--darker-bg);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .audio-controls {
+            margin-bottom: 0.5rem;
+        }
+        
+        #playPauseBtn {
+            background-color: var(--accent-dark);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #playPauseBtn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        #trackInfo {
+            margin-left: 1rem;
+            font-style: italic;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .volume-control span {
+            font-size: 0.8rem;
+        }
+        
+        #volumeSlider {
+            width: 100px;
+        }
         
         /* Навигация */
         nav {
@@ -146,6 +196,24 @@
         .city-image-link {
             display: inline-block;
             text-decoration: none;
+        }
+
+        /* Стили для видео */
+        .video-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .video-container video {
+            max-width: 100%;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-caption {
+            margin-top: 1rem;
+            font-style: italic;
         }
         
         /* Стили для изображения оформления */
@@ -324,6 +392,23 @@
     </style>
 </head>
 <body>
+    <!-- Аудиоплеер -->
+    <div class="audio-player">
+        <div class="audio-controls">
+            <button id="playPauseBtn" onclick="togglePlay()">▶️ Включить атмосферу</button>
+            <span id="trackInfo">Асфодель: Саундтрек</span>
+        </div>
+        <audio id="backgroundAudio" loop>
+            <source src="audio/asphodel-theme.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио элементы.
+        </audio>
+        <div class="volume-control">
+            <span>🔈</span>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.7" oninput="setVolume(this.value)">
+            <span>🔊</span>
+        </div>
+    </div>
+    
     <nav>
         <ul>
             <li><a href="#basic">Основное</a></li>
@@ -541,6 +626,16 @@
                 <p>Команды могут прийти к этому выводу сами, но на случай, если они к такому выводу не придут, как раз и разыгрывается аудиенция с Мэром. Тот человек из команды, кто пойдёт на аудиенцию, узнает от Мэра, что тот не только уже просто боится принимать какие-то решения и выбрал молчать, но и узнает, что Мэр понимает, что единственное спасение Асфоделя в объединении всех. Человек, который был на аудиенции, может донести эту мысль до команды, а команда в свою очередь донесёт до других команд.</p>
                 <p>Вопрос лишь в одном, готовы ли они довериться Мэру?</p>
             </div>
+
+            <!-- Видео с объяснением механики -->
+            <div class="video-container">
+                <p>Чтобы ознакомиться с механикой квеста и лучше понять, что будут видеть перваки на квесте, посмотрите это видео:</p>
+                <video controls>
+                    <source src="videos/quest-mechanics.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео тег.
+                </video>
+                <p class="video-caption">Видеообъяснение механики квеста от соавтора</p>
+            </div>
         </section>
         
         <section id="characters">
@@ -707,6 +802,7 @@
     </div>
     
     <script>
+        // Функции для показа/скрытия деталей
         function toggleDetails(id) {
             const element = document.getElementById(id);
             if (element.style.display === 'block') {
@@ -715,6 +811,49 @@
                 element.style.display = 'block';
             }
         }
+        
+        // Аудио функции
+        const audio = document.getElementById('backgroundAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = '⏸️ Пауза';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '▶️ Включить атмосферу';
+            }
+        }
+        
+        function setVolume(volume) {
+            audio.volume = volume;
+        }
+        
+        // Автоматическая пауза при прокрутке (опционально)
+        let isScrolling;
+        window.addEventListener('scroll', function() {
+            window.clearTimeout(isScrolling);
+            
+            if (!audio.paused) {
+                audio.volume = 0.3; // Уменьшаем громкость при прокрутке
+            }
+            
+            isScrolling = setTimeout(function() {
+                if (!audio.paused) {
+                    audio.volume = 0.7; // Возвращаем нормальную громкость
+                }
+            }, 150);
+        }, false);
+        
+        // Добавьте этот код для отображения загрузки
+        audio.addEventListener('loadstart', function() {
+            playPauseBtn.textContent = '⏳ Загрузка...';
+        });
+
+        audio.addEventListener('canplay', function() {
+            playPauseBtn.textContent = '▶️ Включить атмосферу';
+        });
     </script>
 </body>
 </html>
