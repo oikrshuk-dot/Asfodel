@@ -258,7 +258,48 @@
             iframe {
                 min-height: 300px;
             }
-        }  
+        }
+
+        /* Стили для мобильного видео */
+        .video-wrapper {
+            position: relative;
+        }
+
+        .mobile-fallback {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .mobile-video-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-dark);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-video-link:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Показываем подсказку только на мобильных устройствах */
+        @media (max-width: 768px) {
+            .mobile-fallback {
+                display: block;
+            }
+    
+            /* Улучшаем отображение iframe на мобильных */
+            iframe {
+                min-height: 250px;
+            }
+        }
         
         /* Схема города */
         .city-structure {
@@ -664,15 +705,28 @@
             <!-- Видео с объяснением механики -->
             <div class="video-container">
                 <p>Чтобы ознакомиться с механикой квеста и лучше понять, что будут видеть перваки на квесте, посмотрите это видео:</p>
-                <iframe 
-                    src="https://drive.google.com/file/d/ВАШ_ИДЕНТИФИКАТОР_ВИДЕО/preview" 
-                    width="100%" 
-                    height="480" 
-                    allow="autoplay" 
-                    style="border: 2px solid var(--accent-color); border-radius: 5px;"
-                    frameborder="0">
-                </iframe>
-                <p class="video-caption">Видеообъяснение механики квеста от Вити.</p>
+    
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://drive.google.com/file/d/ВАШ_ИДЕНТИФИКАТОР_ВИДЕО/preview" 
+                        width="100%" 
+                        height="480" 
+                        allow="autoplay; encrypted-media; fullscreen" 
+                        style="border: 2px solid var(--accent-color); border-radius: 5px;"
+                        frameborder="0"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+        
+                    <div class="mobile-fallback">
+                        <p>На мобильных устройствах для просмотра видео может потребоваться нажать на значок полноэкранного режима после запуска видео.</p>
+                        <a href="https://drive.google.com/file/d/ВАШ_ИДЕНТИФИКАТОР_ВИДЕО/view" target="_blank" class="mobile-video-link">
+                            📱 Открыть видео в приложении Google Drive
+                        </a>
+                    </div>
+                </div>
+    
+                <p class="video-caption">Видеообъяснение механики квеста от Вити</p>
             </div>
         </section>
         
@@ -703,18 +757,31 @@
         <section id="plot">
             <h2>Сюжет квеста</h2>
             
-            <!-- видео с объяснением сюжета -->
+            <!-- Видео с объяснением механики -->
             <div class="video-container">
-                <p>Чтобы глубже понять смысл сюжета, посмотрите это видео:</p>
-                <iframe 
-                    src="https://drive.google.com/file/d/1dMJ7tK4dN30y2z6YCxV_hqylF6K109pm/preview" 
-                    width="100%" 
-                    height="480" 
-                    allow="autoplay" 
-                    style="border: 2px solid var(--accent-color); border-radius: 5px;"
-                    frameborder="0">
-                </iframe>
-                <p class="video-caption">Видеообъяснение смысла сюжета от Лёли</p>
+                <p>Чтобы глубже понять сюжет, посмотрите это видео:</p>
+    
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://drive.google.com/file/d/1BFlQF4LKV8tQtgqTt59Dj6cO9xpLZONp/preview" 
+                        width="100%" 
+                        height="480" 
+                        allow="autoplay; encrypted-media; fullscreen" 
+                        style="border: 2px solid var(--accent-color); border-radius: 5px;"
+                        frameborder="0"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+        
+                    <div class="mobile-fallback">
+                        <p>На мобильных устройствах для просмотра видео может потребоваться нажать на значок полноэкранного режима после запуска видео.</p>
+                        <a href="https://drive.google.com/file/d/1BFlQF4LKV8tQtgqTt59Dj6cO9xpLZONp/view" target="_blank" class="mobile-video-link">
+                            📱 Открыть видео в приложении Google Drive
+                        </a>
+                    </div>
+                </div>
+    
+                <p class="video-caption">Видеообъяснение сюжета квеста от Лели</p>
             </div>
             
             <h3>Ключевое событие: «Разрыв Света»</h3>
